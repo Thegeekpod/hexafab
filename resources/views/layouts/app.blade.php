@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
-  <link rel="stylesheet" href="{{ asset('assets/css/mobile-responsive.css') }}" />
+  <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}?v={{ file_exists(public_path('assets/css/style.css')) ? filemtime(public_path('assets/css/style.css')) : time() }}" />
+  <link rel="stylesheet" href="{{ asset('assets/css/mobile-responsive.css') }}?v={{ file_exists(public_path('assets/css/mobile-responsive.css')) ? filemtime(public_path('assets/css/mobile-responsive.css')) : time() }}" />
   @yield('styles')
 </head>
 
