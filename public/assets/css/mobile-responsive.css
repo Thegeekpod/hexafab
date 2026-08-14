@@ -1,0 +1,1144 @@
+/* ==========================================================================
+   Hexafab Steels Mobile Responsive Stylesheet (Screen width <= 768px)
+   ========================================================================== */
+
+@media screen and (max-width: 768px) {
+
+  /* ------------------------------------------------------------------------
+     1. Global Layout & Reset Duplicate Section Padding
+     ------------------------------------------------------------------------ */
+  html,
+  body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Single clean container padding (16px / 1rem) across mobile screens */
+  .container,
+  .site-header .header-inner,
+  .hero .container,
+  .know-about .container,
+  .key-features .container,
+  .brands-section .container,
+  .top-brands .container,
+  .quick-access .container,
+  .testimonial-section .container,
+  .resources-section .container,
+  .applications-section .container,
+  .product-hero .container,
+  .site-footer .footer-top,
+  .site-footer .footer-bottom {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    box-sizing: border-box !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .know-about,
+  .key-features,
+  .brands-section,
+  .top-brands,
+  .quick-access,
+  .testimonial-section,
+  .resources-section,
+  .applications-section,
+  .detailed-info,
+  .core-values,
+  .contact-section,
+  .products-section,
+  .projects-section,
+  .store-locator,
+  .resources-page,
+  .policy-section {
+    padding-top: 2.25rem !important;
+    padding-bottom: 2.25rem !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     2. Universal Left Alignment for Headers, Labels & Titles
+     ------------------------------------------------------------------------ */
+  .section-header,
+  .section-heading,
+  .section-label,
+  .section-desc,
+  .section-subtitle,
+  .hero-content,
+  .hero-title,
+  .hero-subtitle,
+  .hero-desc,
+  .hero-main-title,
+  .hero-content-left,
+  .page-hero-content,
+  .page-hero-title,
+  .page-hero-subtitle,
+  .slide-content,
+  .slide-content .heading,
+  .slide-content .description,
+  .brand-slide-content,
+  .brand-slide-content .heading,
+  .brand-slide-content .sub-heading,
+  .brand-slide-content .label,
+  .feature-item,
+  .feature-title,
+  .feature-desc,
+  .item-title,
+  .item-desc,
+  .app-title,
+  .app-desc,
+  .resource-title,
+  .resource-desc,
+  .card-title,
+  .card-desc,
+  .stat-item,
+  .val-title,
+  .val-desc {
+    text-align: left !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+  }
+
+  .section-header,
+  .know-about .section-header,
+  .key-features .section-header,
+  .brands-section .section-header,
+  .top-brands .section-header,
+  .quick-access .section-header,
+  .testimonial-section .section-header,
+  .resources-section .section-header {
+    margin-bottom: 1.5rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    padding: 0 !important;
+  }
+
+  .section-heading,
+  .hero-main-title,
+  .page-hero-title,
+  .slide-content .heading,
+  .brand-slide-content .heading,
+  .brands-section .section-heading,
+  .top-brands .section-heading,
+  .quick-access .section-heading,
+  .testimonial-section .section-heading,
+  .resources-section .section-heading {
+    font-size: clamp(1.4rem, 5vw, 1.85rem) !important;
+    line-height: 1.3 !important;
+    text-align: left !important;
+    margin-left: 0 !important;
+  }
+
+  .section-label,
+  .hero-subtitle,
+  .brand-slide-content .label,
+  .brands-section .section-label,
+  .top-brands .section-label,
+  .quick-access .section-label,
+  .testimonial-section .section-label,
+  .resources-section .section-label {
+    text-align: left !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     3. Header & Mobile Navigation Toggle
+     ------------------------------------------------------------------------ */
+  .site-header {
+    height: auto !important;
+    min-height: 65px !important;
+    padding: 0.5rem 1rem !important;
+  }
+
+  .site-header .header-inner {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  .site-header .header-logo img {
+    max-height: 48px !important;
+    max-width: 180px !important;
+    width: auto !important;
+    height: auto !important;
+  }
+
+  .site-header .nav-main {
+    display: none !important;
+  }
+
+  .site-header .header-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+  }
+
+  .site-header .menu-toggle,
+  #hamburger {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     Off-canvas Mobile Menu Fix
+     ------------------------------------------------------------------------ */
+  .offcanvas-panel {
+    width: 85% !important;
+    max-width: 320px !important;
+    border-radius: 0 20px 20px 0 !important;
+  }
+
+  .offcanvas-header {
+    padding: 1.25rem 1.5rem !important;
+  }
+
+  .offcanvas-header .offcanvas-logo img {
+    max-height: 60px !important;
+  }
+
+  /* Stack nav body to single column, hide the products sub-column */
+  .offcanvas-body {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+    padding: 1.5rem 1.25rem !important;
+    gap: 0 !important;
+  }
+
+  /* Remove right border and extra padding from all cols — stack vertically */
+  .offcanvas-body .offcanvas-col {
+    display: block !important;
+    padding-right: 0 !important;
+    border-right: none !important;
+    border-top: 1px solid rgba(54, 133, 177, 0.12) !important;
+    padding-top: 1rem !important;
+    margin-top: 0.5rem !important;
+    width: 100% !important;
+  }
+
+  .offcanvas-body .offcanvas-col:first-child {
+    border-top: none !important;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  /* Make nav links full-width, larger tap targets */
+  .offcanvas-nav a {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    font-size: 1rem !important;
+    padding: 0.75rem 0 0.75rem 1.25rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Arrow icon inside OUR PRODUCTS toggle */
+  .offcanvas-nav .sub-arrow {
+    width: 16px !important;
+    height: 16px !important;
+    margin-left: 0.5rem !important;
+    flex-shrink: 0 !important;
+    transition: transform 0.3s ease !important;
+    color: #3685b1 !important;
+  }
+
+  .offcanvas-has-sub.is-open>a .sub-arrow {
+    transform: rotate(180deg) !important;
+  }
+
+  /* Sub-menu list — hidden by default */
+  .offcanvas-submenu {
+    list-style: none !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.35s ease !important;
+    background: rgba(54, 133, 177, 0.04) !important;
+    border-left: 3px solid #3685b1 !important;
+    border-radius: 0 8px 8px 0 !important;
+    margin: 0 0 0 1.25rem !important;
+    padding: 0 !important;
+  }
+
+  /* Expanded state */
+  .offcanvas-has-sub.is-open>.offcanvas-submenu {
+    max-height: 400px !important;
+    padding: 0.35rem 0 !important;
+  }
+
+  .offcanvas-submenu li a {
+    display: block !important;
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    color: #333 !important;
+    text-decoration: none !important;
+    padding: 0.55rem 1rem 0.55rem 1rem !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+    transition: color 0.2s ease, padding-left 0.2s ease !important;
+    justify-content: flex-start !important;
+  }
+
+  .offcanvas-submenu li a:hover {
+    color: #3685b1 !important;
+    padding-left: 1.25rem !important;
+  }
+
+  .offcanvas-close {
+    width: 42px !important;
+    height: 42px !important;
+    top: 1rem !important;
+    right: 1rem !important;
+  }
+
+  .offcanvas-footer {
+    padding: 1.25rem 1.5rem !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1rem !important;
+  }
+
+  .offcanvas-footer-btns {
+    width: 100% !important;
+  }
+
+  .offcanvas-footer-btns a {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     4. Main Swiper Hero Banner
+     ------------------------------------------------------------------------ */
+  .hero {
+    min-height: auto !important;
+    height: auto !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+  }
+
+  .hero .hero-swiper,
+  .hero .swiper-slide {
+    height: 400px !important;
+    min-height: auto !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .hero .slide-content {
+    padding: 2.5rem 1.25rem 5rem 1.25rem !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    text-align: left !important;
+    align-items: flex-start !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    box-sizing: border-box !important;
+  }
+
+  .hero .heading {
+    font-size: clamp(1.5rem, 5.5vw, 2.1rem) !important;
+    line-height: 1.25 !important;
+    text-align: left !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .hero .description {
+    font-size: 0.9rem !important;
+    line-height: 1.55 !important;
+    text-align: left !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  .hero .btn {
+    align-self: flex-start !important;
+    margin-top: 0.25rem !important;
+  }
+
+  .hero-nav {
+    position: absolute !important;
+    bottom: 1.25rem !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 1rem !important;
+    z-index: 10 !important;
+    width: auto !important;
+  }
+
+  .hero-nav .swiper-button-prev,
+  .hero-nav .swiper-button-next {
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  .hero-nav .slide-counter {
+    min-width: 3.5rem !important;
+    font-size: 0.8rem !important;
+  }
+
+  .hero-nav .slide-counter .current {
+    font-size: 1.25rem !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     5. Know About Us Section
+     ------------------------------------------------------------------------ */
+  .know-about .container {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+    gap: 1.75rem !important;
+  }
+
+  .know-about .content {
+    text-align: left !important;
+    align-items: flex-start !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  .know-about .section-label,
+  .know-about .section-heading,
+  .know-about .section-desc {
+    text-align: left !important;
+  }
+
+  .know-about .read-more {
+    align-self: flex-start !important;
+    margin-top: 0.5rem !important;
+  }
+
+  .know-about .stats {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.5rem !important;
+    width: 100% !important;
+    margin-top: 1.5rem !important;
+    padding: 0 !important;
+  }
+
+  .know-about .stat-item {
+    text-align: center !important;
+    align-items: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 0.75rem 0.35rem !important;
+    box-sizing: border-box !important;
+    background: rgba(54, 133, 177, 0.04) !important;
+    border-radius: 8px !important;
+  }
+
+  .know-about .stat-value {
+    font-size: 1.45rem !important;
+    font-weight: 700 !important;
+    color: #3685b1 !important;
+    line-height: 1.2 !important;
+    margin-bottom: 0.25rem !important;
+    text-align: center !important;
+  }
+
+  .know-about .stat-label {
+    font-size: 0.6875rem !important;
+    font-weight: 600 !important;
+    color: #666 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.02em !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+  }
+
+  .know-about .image-wrap {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .know-about .image-wrap img {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: cover !important;
+    border-radius: 12px !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     6. Key Features Section (Numbered Blocks)
+     ------------------------------------------------------------------------ */
+  .key-features .features-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    width: 100% !important;
+  }
+
+  .key-features .feature-item {
+    text-align: left !important;
+    align-items: flex-start !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 1.25rem !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+  }
+
+  .key-features .feature-num,
+  .key-features .feature-title,
+  .key-features .feature-desc {
+    text-align: left !important;
+    margin-left: 0 !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     7. Brands Section (Main Swiper + Thumbs)
+     ------------------------------------------------------------------------ */
+  .brands-section .slider-wrap {
+    min-height: auto !important;
+    height: auto !important;
+    padding-bottom: 0 !important;
+    position: relative !important;
+    width: 100% !important;
+  }
+
+  .brands-section .brand-main-swiper {
+    height: 420px !important;
+    min-height: 420px !important;
+    width: 100% !important;
+  }
+
+  .brands-section .brand-slide-content {
+    padding: 2rem 1rem 3.5rem 1rem !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    text-align: left !important;
+    align-items: flex-start !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .brands-section .brand-slide-content .heading {
+    font-size: 1.5rem !important;
+    line-height: 1.25 !important;
+    text-align: left !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .brands-section .brand-slide-content .sub-heading {
+    font-size: 0.875rem !important;
+    line-height: 1.45 !important;
+    text-align: left !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .brands-section .brand-slide-content .btn {
+    align-self: flex-start !important;
+  }
+
+  .brands-section .brand-thumbs {
+    position: relative !important;
+    bottom: auto !important;
+    left: 0 !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 1rem 0 0 0 !important;
+    padding: 0 1rem !important;
+    box-sizing: border-box !important;
+    z-index: 10 !important;
+  }
+
+  .brands-section .thumbs-strip {
+    border-radius: 20px !important;
+    padding: 0.5rem 0.75rem !important;
+    background: #fff !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     8. Top Brands / Top Products Cards Section
+     ------------------------------------------------------------------------ */
+  .top-brands .cards-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+    gap: 1.25rem !important;
+  }
+
+  .top-brands .card {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 1 1 100% !important;
+    aspect-ratio: 16/10 !important;
+    border-radius: 12px !important;
+    box-sizing: border-box !important;
+    margin: 0 auto !important;
+  }
+
+  .top-brands .card-label {
+    width: calc(100% - 1.5rem) !important;
+    max-width: calc(100% - 1.5rem) !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    justify-content: center !important;
+    font-size: 0.8125rem !important;
+    padding: 0.6rem 0.75rem !important;
+    white-space: normal !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     9. Quick Access Section
+     ------------------------------------------------------------------------ */
+  .quick-access .items-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+    margin-top: 1.5rem !important;
+    width: 100% !important;
+  }
+
+  .quick-access .item {
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  .quick-access .item-icon {
+    margin: 0 auto 0.85rem auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .quick-access .item-title,
+  .quick-access .item-desc {
+    text-align: center !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     10. Testimonial Section (Full Width Cards without double padding)
+     ------------------------------------------------------------------------ */
+  .testimonial-section {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .testimonial-section .swiper,
+  .testimonial-section .testimonial-swiper {
+    width: 100% !important;
+    padding: 1rem 0 2rem 0 !important;
+    overflow: hidden !important;
+  }
+
+  .testimonial-section .swiper-slide {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .testimonial-section .testimonial-card {
+    display: flex !important;
+    flex-direction: column !important;
+    text-align: left !important;
+    border-radius: 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+  }
+
+  .testimonial-section .testimonial-content {
+    padding: 1.25rem 1rem !important;
+    text-align: left !important;
+    align-items: flex-start !important;
+    display: flex !important;
+    flex-direction: column !important;
+    border-left: 3px solid #3685b1 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .testimonial-section .testimonial-quote,
+  .testimonial-section .testimonial-author,
+  .testimonial-section .testimonial-role {
+    text-align: left !important;
+  }
+
+  .testimonial-section .testimonial-stars {
+    justify-content: flex-start !important;
+  }
+
+  .testimonial-section .testimonial-author-block {
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     11. Resources Section
+     ------------------------------------------------------------------------ */
+  .resources-section {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .resources-section .resources-swiper {
+    width: 100% !important;
+    padding-bottom: 1.5rem !important;
+  }
+
+  .resources-section .resource-card-body {
+    padding: 1.25rem 1rem !important;
+    text-align: left !important;
+    align-items: flex-start !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .resources-section .resource-card-title,
+  .resources-section .resource-card-desc,
+  .resources-section .resource-card-link {
+    text-align: left !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     12. Site Footer
+     ------------------------------------------------------------------------ */
+  .site-footer {
+    padding-top: 2.25rem !important;
+    padding-bottom: 1.75rem !important;
+  }
+
+  .site-footer .footer-top {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+    gap: 1.75rem !important;
+    max-width: 100% !important;
+    padding: 0 1rem 1.25rem 1rem !important;
+    text-align: left !important;
+    box-sizing: border-box !important;
+  }
+
+  .site-footer .footer-col,
+  .site-footer .footer-about {
+    text-align: left !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .site-footer .footer-desc {
+    max-width: 100% !important;
+    text-align: left !important;
+  }
+
+  .site-footer .footer-contact-item {
+    text-align: left !important;
+    align-items: flex-start !important;
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 0.75rem !important;
+  }
+
+  .site-footer .footer-col-heading,
+  .site-footer .footer-links,
+  .site-footer .footer-links li,
+  .site-footer .footer-links a {
+    text-align: left !important;
+  }
+
+  .site-footer .footer-bottom {
+    max-width: 100% !important;
+    padding: 1rem 1rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    gap: 0.75rem !important;
+    box-sizing: border-box !important;
+  }
+
+  .site-footer .copyright,
+  .site-footer .footer-legal-links {
+    text-align: left !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     13. Inner Product Pages & Sub-Page Responsive Styles
+     ------------------------------------------------------------------------ */
+  .product-hero {
+    padding: 1.5rem 0 !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+  }
+
+  .product-hero .hero-grid-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .product-hero .hero-split-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+    width: 100% !important;
+  }
+
+  .hero-content-left,
+  .hero-image-right,
+  .spec-item,
+  .excel-card,
+  .perf-card,
+  .app-card,
+  .app-content,
+  .info-item,
+  .product-card,
+  .project-card,
+  .store-card,
+  .resource-card,
+  .val-card,
+  .contact-info-card {
+    text-align: left !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .product-hero .hero-main-title {
+    font-size: clamp(1.65rem, 6vw, 2.25rem) !important;
+    line-height: 1.25 !important;
+    text-align: left !important;
+  }
+
+  .product-hero .hero-desc {
+    text-align: left !important;
+    font-size: 0.925rem !important;
+  }
+
+  .product-hero .hero-download-btn {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 0.85rem 1rem !important;
+    font-size: 0.825rem !important;
+  }
+
+  .product-hero .hero-image-right img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 280px !important;
+    object-fit: cover !important;
+    border-radius: 16px !important;
+  }
+
+  /* Specs Bar (Product Hero) */
+  .hero-specs-bar {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.25rem 1rem !important;
+    padding: 1.25rem 1.25rem !important;
+    margin-top: 1.5rem !important;
+    border-radius: 16px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .spec-bar-item {
+    text-align: left !important;
+  }
+
+  .spec-bar-item:not(:last-child)::after {
+    display: none !important;
+  }
+
+  .spec-bar-label {
+    font-size: 0.6875rem !important;
+  }
+
+  .spec-bar-value {
+    font-size: 0.85rem !important;
+  }
+
+  /* Universal Section Header Center Fix for Mobile */
+  .section-header-center {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    text-align: left !important;
+    margin: 0 0 1.5rem 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .section-header-center h2 {
+    text-align: left !important;
+    font-size: clamp(1.5rem, 5.5vw, 2.1rem) !important;
+    line-height: 1.25 !important;
+  }
+
+  .section-header-center .section-label {
+    text-align: left !important;
+    display: block !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  /* Grid Containers Stacking to 1 Column */
+  .apps-grid,
+  .info-grid,
+  .spec-grid,
+  .spec-strip-grid,
+  .where-it-excels-grid,
+  .excels-cards-grid,
+  .performance-core-grid,
+  .performance-card-row,
+  .detailed-perf-grid,
+  .detailed-info-grid,
+  .app-cards-grid,
+  .tech-manual-wrap,
+  .two-col-grid,
+  .feature-block,
+  .core-values-grid,
+  .contact-grid,
+  .products-grid,
+  .projects-grid,
+  .store-locator-grid,
+  .resources-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+  }
+
+  /* Applications Section Cards */
+  .applications-section {
+    padding-top: 2.25rem !important;
+    padding-bottom: 2.25rem !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .app-card {
+    width: 100% !important;
+    border-radius: 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  .app-image {
+    height: 190px !important;
+    width: 100% !important;
+  }
+
+  .app-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .app-content {
+    padding: 1.25rem !important;
+    text-align: left !important;
+  }
+
+  .app-title {
+    font-size: 1.15rem !important;
+    margin-bottom: 0.5rem !important;
+    text-align: left !important;
+  }
+
+  .app-desc {
+    font-size: 0.875rem !important;
+    line-height: 1.55 !important;
+    text-align: left !important;
+  }
+
+  /* Detailed Info Section (Performance Core) */
+  .detailed-info {
+    padding-top: 2.25rem !important;
+    padding-bottom: 2.25rem !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .info-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .info-item {
+    padding: 1.5rem 1.25rem !important;
+    border-radius: 16px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    text-align: left !important;
+    align-items: flex-start !important;
+  }
+
+  .info-icon {
+    width: 48px !important;
+    height: 48px !important;
+    margin-bottom: 1rem !important;
+    border-radius: 12px !important;
+  }
+
+  .info-item h4 {
+    font-size: 1.15rem !important;
+    margin-bottom: 0.5rem !important;
+    text-align: left !important;
+  }
+
+  .info-item p {
+    font-size: 0.875rem !important;
+    line-height: 1.55 !important;
+    text-align: left !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     14. KEEP IN MIDDLE (Sliders, Controls, Counters, Brand Logos & Icons)
+     ------------------------------------------------------------------------ */
+  /* Slider Controls & Counters */
+  .hero-nav,
+  .slider-controls,
+  .resources-swiper-nav,
+  .swiper-pagination {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+  }
+
+  .slide-counter,
+  .testimonial-counter {
+    text-align: center !important;
+    margin: 0 0.75rem !important;
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Brand logos inside thumb slider */
+  .thumb-logo,
+  .brand-card img,
+  .partner-logo img {
+    margin: 0 auto !important;
+    display: block !important;
+  }
+
+  /* Center SVG graphics inside circular badge elements */
+  .quick-access .item-icon svg,
+  .feature-icon svg,
+  .testimonial-avatar,
+  .avatar-wrap {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Centered Modals / Search Form Overlay */
+  .header-search-overlay .search-form-wrap,
+  .modal-dialog,
+  .popup-content {
+    margin: 0 auto !important;
+    text-align: center !important;
+  }
+
+  /* About Us Page Specific Responsive Styles */
+  .content-grid-2 {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .content-text h2 {
+    font-size: 1.75rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .content-text p {
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+    margin-top: 2rem !important;
+  }
+
+  .value-box {
+    padding: 1.5rem !important;
+  }
+
+  .internal-hero {
+    height: 35vh !important;
+    min-height: 250px !important;
+  }
+
+  .internal-hero-content h1 {
+    font-size: 1.85rem !important;
+  }
+
+  .about-stats {
+    justify-content: center !important;
+    text-align: center !important;
+    gap: 3rem !important;
+  }
+
+  .about-stat-item {
+    text-align: center !important;
+  }
+}
