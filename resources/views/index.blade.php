@@ -493,21 +493,21 @@
       </div>
       <div class="swiper resources-swiper">
         <div class="swiper-wrapper">
-          @foreach($resources as $resource)
+          @foreach($blogs as $blog)
             <div class="swiper-slide">
-              <a href="{{ route('blog-details') }}" class="resource-card">
+              <a href="{{ route('blog.show', $blog->slug) }}" class="resource-card">
                 <div class="resource-card-image-wrap">
-                  <img src="{{ asset($resource->image_path) }}" alt="{{ $resource->title }}" loading="lazy" />
-                  <span class="resource-card-tag">{{ $resource->tag }}</span>
+                  <img src="{{ asset($blog->image_path ?: 'images/Hero-banner-1.webp') }}" alt="{{ $blog->title }}" loading="lazy" />
+                  <span class="resource-card-tag">{{ $blog->tag }}</span>
                 </div>
                 <div class="resource-card-body">
                   <h3 class="resource-card-title">
-                    {{ $resource->title }}
+                    {{ $blog->title }}
                   </h3>
                   <p class="resource-card-desc">
-                    {{ $resource->description }}
+                    {{ $blog->description }}
                   </p>
-                  <span class="resource-card-link">{{ $resource->link_text }}</span>
+                  <span class="resource-card-link">{{ $blog->link_text }}</span>
                 </div>
               </a>
             </div>

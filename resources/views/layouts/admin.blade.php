@@ -67,7 +67,10 @@
                     <i class="bi bi-images me-2"></i> Projects
                 </a>
                 <a href="{{ route('admin.resources.index') }}" class="{{ request()->routeIs('admin.resources.*') ? 'active' : '' }}">
-                    <i class="bi bi-journal-text me-2"></i> Resources
+                    <i class="bi bi-file-earmark-pdf me-2"></i> PDF Resources
+                </a>
+                <a href="{{ route('admin.blogs.index') }}" class="{{ request()->routeIs('admin.blogs.*') ? 'active' : '' }}">
+                    <i class="bi bi-newspaper me-2"></i> Blogs & Insights
                 </a>
                 <a href="{{ route('admin.partners.index') }}" class="{{ request()->routeIs('admin.partners.*') ? 'active' : '' }}">
                     <i class="bi bi-person-lines-fill me-2"></i> Partner Inquiries

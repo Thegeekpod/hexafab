@@ -54,6 +54,32 @@
             <textarea class="form-control" id="hero_desc" name="hero_desc" rows="3">{{ old('hero_desc', $product->hero_desc) }}</textarea>
         </div>
 
+        <!-- Technical Manual PDF Section -->
+        <div class="card p-3 bg-light border mb-4">
+            <h6 class="text-dark fw-bold mb-2"><i class="bi bi-file-earmark-pdf-fill text-danger me-1"></i> Product Technical Manual (PDF)</h6>
+            <div class="row">
+                <div class="col-md-6 mb-2">
+                    <label for="pdf_file" class="form-label small fw-semibold">Upload New PDF File</label>
+                    <input type="file" class="form-control" id="pdf_file" name="pdf_file" accept=".pdf,application/pdf">
+                    @if($product->pdf_path)
+                        <div class="mt-2 small">
+                            <span class="text-success fw-bold"><i class="bi bi-check-circle-fill me-1"></i> Current PDF:</span>
+                            <a href="{{ asset($product->pdf_path) }}" target="_blank" class="text-primary fw-semibold text-decoration-none ms-1">
+                                <i class="bi bi-file-earmark-arrow-down me-1"></i> View / Download Current File
+                            </a>
+                        </div>
+                    @else
+                        <div class="form-text text-muted">No PDF uploaded yet. Max file size: 20MB.</div>
+                    @endif
+                </div>
+                <div class="col-md-6 mb-2">
+                    <label for="pdf_button_text" class="form-label small fw-semibold">Download Button Label</label>
+                    <input type="text" class="form-control" id="pdf_button_text" name="pdf_button_text" value="{{ old('pdf_button_text', $product->pdf_button_text) }}" placeholder="e.g. Download Technical Manual (v4.2.0 | PDF)">
+                    <div class="form-text">Custom text displayed on the product page download button.</div>
+                </div>
+            </div>
+        </div>
+
         <!-- Spec Bar -->
         <h6 class="mt-4 mb-3 text-secondary">Horizontal Specifications Bar (e.g. SUBSTRATE, SEAM HEIGHT)</h6>
         <div id="spec-bar-container">

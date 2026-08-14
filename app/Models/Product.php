@@ -15,6 +15,8 @@ class Product extends Model
         'hero_title',
         'hero_subtitle',
         'hero_desc',
+        'pdf_path',
+        'pdf_button_text',
         'specifications',
         'spec_bar',
         'app_heading',

@@ -87,10 +87,11 @@
           <line x1="6" y1="6" x2="18" y2="18" />
         </svg>
       </button>
-      <form class="search-form" action="javascript:void(0);" method="get" role="search">
-        <input type="search" name="s" class="search-input" placeholder="Search..." autocomplete="off" id="headerSearchInput" />
+      <form class="search-form" id="headerSearchForm" action="{{ route('products') }}" method="get" role="search">
+        <input type="search" name="search" class="search-input" placeholder="Search steel products (e.g. Standing Seam, Purlin)..." autocomplete="off" id="headerSearchInput" />
         <button type="submit" class="search-submit">Search</button>
       </form>
+      <div class="search-results-container" id="searchResultsContainer"></div>
     </div>
   </div>
 
@@ -260,19 +261,12 @@
       </div>
       <div class="footer-social">
         <span class="footer-social-label">Follow us on:</span>
-        <a href="javascript:void(0);" aria-label="Facebook" title="Facebook">
+        <a href="https://www.facebook.com/Hexafabsteels" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">
           <svg viewBox="0 0 24 24" fill="currentColor">
             <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
           </svg>
         </a>
-        <a href="javascript:void(0);" aria-label="LinkedIn" title="LinkedIn">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-            <rect x="2" y="9" width="4" height="12" />
-            <circle cx="4" cy="4" r="2" />
-          </svg>
-        </a>
-        <a href="javascript:void(0);" aria-label="Instagram" title="Instagram">
+        <a href="https://www.instagram.com/hexafabsteels/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
             <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
@@ -285,35 +279,127 @@
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
-    // Search Overlay logic
+    // Search Overlay & Live Product Search logic
     ;(function () {
       var searchBtn = document.querySelector(".header-search")
       var searchClose = document.getElementById("searchClose")
       var overlay = document.getElementById("headerSearchOverlay")
       var searchInput = document.getElementById("headerSearchInput")
+      var resultsContainer = document.getElementById("searchResultsContainer")
+      var searchForm = document.getElementById("headerSearchForm")
+      var debounceTimeout = null
+      var currentSelectedIndex = -1
+
       if (!searchBtn || !overlay) return
+
       function openSearch() {
         document.body.classList.add("is-search-open")
         overlay.setAttribute("aria-hidden", "false")
         if (searchInput) {
           searchInput.focus()
+          if (searchInput.value.trim().length > 0) {
+            fetchSearchResults(searchInput.value.trim())
+          }
         }
       }
+
       function closeSearch() {
         document.body.classList.remove("is-search-open")
         overlay.setAttribute("aria-hidden", "true")
+        if (resultsContainer) {
+          resultsContainer.classList.remove("is-active")
+          resultsContainer.innerHTML = ""
+        }
       }
+
+      function fetchSearchResults(query) {
+        if (!resultsContainer) return
+        if (query.length === 0) {
+          resultsContainer.classList.remove("is-active")
+          resultsContainer.innerHTML = ""
+          return
+        }
+
+        resultsContainer.classList.add("is-active")
+        resultsContainer.innerHTML = '<div class="search-loading-indicator">Searching products...</div>'
+
+        fetch('{{ route("api.search.products") }}?q=' + encodeURIComponent(query))
+          .then(function (res) { return res.json() })
+          .then(function (data) {
+            var products = data.products || []
+            if (products.length === 0) {
+              resultsContainer.innerHTML = 
+                '<div class="search-no-results">' +
+                  '<div class="search-no-results-icon">' +
+                    '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">' +
+                      '<circle cx="11" cy="11" r="8"></circle>' +
+                      '<line x1="21" y1="21" x2="16.65" y2="16.65"></line>' +
+                      '<line x1="8" y1="11" x2="14" y2="11"></line>' +
+                    '</svg>' +
+                  '</div>' +
+                  '<p class="search-no-results-text">No products found matching "' + escapeHtml(query) + '"</p>' +
+                  '<p class="search-no-results-sub">Try searching for Standing Seam, Purlin, Corrugated, or Deck Sheet.</p>' +
+                '</div>'
+              return
+            }
+
+            var html = ''
+            products.forEach(function (prod) {
+              var badgeHtml = prod.badge ? '<span class="search-result-badge">' + escapeHtml(prod.badge) + '</span>' : ''
+              html += 
+                '<a href="' + prod.url + '" class="search-result-item">' +
+                  '<img src="' + prod.image + '" alt="' + escapeHtml(prod.title) + '" class="search-result-thumb" />' +
+                  '<div class="search-result-info">' +
+                    '<div class="search-result-title-row">' +
+                      '<h4 class="search-result-title">' + escapeHtml(prod.title) + '</h4>' +
+                      badgeHtml +
+                    '</div>' +
+                    '<p class="search-result-desc">' + escapeHtml(prod.desc) + '</p>' +
+                  '</div>' +
+                  '<div class="search-result-arrow">' +
+                    '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' +
+                      '<path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path>' +
+                    '</svg>' +
+                  '</div>' +
+                '</a>'
+            })
+
+            html += '<a href="{{ route("products") }}?search=' + encodeURIComponent(query) + '" class="search-results-footer">View all search results →</a>'
+            resultsContainer.innerHTML = html
+          })
+          .catch(function (err) {
+            console.error(err)
+            resultsContainer.innerHTML = '<div class="search-no-results"><p class="search-no-results-text">Error fetching search results.</p></div>'
+          })
+      }
+
+      function escapeHtml(str) {
+        if (!str) return ''
+        return str.replace(/[&<>"']/g, function (m) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m]
+        })
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener("input", function () {
+          clearTimeout(debounceTimeout)
+          var q = this.value.trim()
+          debounceTimeout = setTimeout(function () {
+            fetchSearchResults(q)
+          }, 250)
+        })
+      }
+
       searchBtn.addEventListener("click", openSearch)
       searchClose.addEventListener("click", closeSearch)
       overlay.addEventListener("click", function (e) {
         if (e.target === overlay) closeSearch()
       })
+
       document.addEventListener("keydown", function (e) {
-        if (
-          e.key === "Escape" &&
-          document.body.classList.contains("is-search-open")
-        )
+        if (e.key === "Escape" && document.body.classList.contains("is-search-open")) {
           closeSearch()
+        }
       })
     })()
 

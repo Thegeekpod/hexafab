@@ -269,40 +269,33 @@ class DatabaseSeeder extends Seeder
             \App\Models\Project::updateOrCreate(['image_path' => $proj['image_path']], $proj);
         }
 
-        // Seed ResourceItems
+        // Seed ResourceItems (PDF downloads for /resources page)
         $resources = [
             [
-                'title' => 'From Straw To Steel: The Evolution Of Materials',
-                'tag' => 'BLOG',
-                'description' => 'Explore the journey of from traditional materials to modern coated steel solutions.',
-                'image_path' => 'images/commercial-building-2.webp',
-                'link_text' => 'Read more →',
+                'title' => 'Main Brochure',
+                'icon_type' => 'brochure',
+                'description' => 'Comprehensive catalog of our complete product range and technical specifications.',
+                'link_text' => 'Download PDF',
             ],
             [
-                'title' => 'Monsoon Proof Your Roof With Color-Coated Steel',
-                'tag' => 'CAMPAIGN',
-                'description' => 'Discover how our sheets protect your property through the harshest weather.',
-                'image_path' => 'images/factory-image.webp',
-                'link_text' => 'Explore campaign →',
+                'title' => 'Product Manual',
+                'icon_type' => 'manual',
+                'description' => 'Step-by-step installation guides and maintenance tips for sheets.',
+                'link_text' => 'Download PDF',
             ],
             [
-                'title' => 'Best Practices: A Technical Deep Dive',
-                'tag' => 'WEBINAR',
-                'description' => 'Join our experts for insights on installation, maintenance and product selection.',
-                'image_path' => 'images/residential-house1.webp',
-                'link_text' => 'Watch webinar →',
-            ],
-            [
-                'title' => 'Why Choose Hexafab steels for Your Next Project',
-                'tag' => 'BLOG',
-                'description' => 'Quality, durability and a comprehensive range—find out what sets us apart.',
-                'image_path' => 'images/Hero-banner-1.webp',
-                'link_text' => 'Read more →',
+                'title' => 'Technical Specs',
+                'icon_type' => 'specs',
+                'description' => 'Detailed material properties, load capacity tables, and environmental certifications.',
+                'link_text' => 'Download PDF',
             ],
         ];
 
         foreach ($resources as $res) {
             \App\Models\ResourceItem::updateOrCreate(['title' => $res['title']], $res);
         }
+
+        // Seed Blogs for homepage & blog details
+        $this->call(BlogSeeder::class);
     }
 }

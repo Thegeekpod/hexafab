@@ -27,14 +27,25 @@
             <p class="hero-desc">
               {{ $product->hero_desc }}
             </p>
-            <a href="javascript:void(0);" class="hero-download-btn">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <polyline points="7 10 12 15 17 10" />
-                <line x1="12" y1="15" x2="12" y2="3" />
-              </svg>
-              <span>Download Technical Manual (v4.2.0 | PDF)</span>
-            </a>
+            @if($product->pdf_path)
+              <a href="{{ asset($product->pdf_path) }}" target="_blank" download class="hero-download-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                <span>{{ $product->pdf_button_text ?: 'Download Technical Manual (PDF)' }}</span>
+              </a>
+            @else
+              <a href="{{ route('contact') }}" class="hero-download-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                <span>{{ $product->pdf_button_text ?: 'Request Technical Manual (PDF)' }}</span>
+              </a>
+            @endif
           </div>
           <div class="hero-image-right">
             <img src="{{ asset($product->hero_image ?? $product->image_path) }}" alt="{{ $product->title }}" />

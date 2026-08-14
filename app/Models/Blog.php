@@ -4,15 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ResourceItem extends Model
+class Blog extends Model
 {
     protected $fillable = [
         'title',
-        'description',
-        'pdf_path',
-        'icon_type',
+        'slug',
         'tag',
+        'description',
+        'content',
         'image_path',
         'link_text',
+        'author',
+        'reading_time',
+        'is_featured',
     ];
 }

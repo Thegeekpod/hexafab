@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\ResourceItem;
+use Illuminate\Support\Str;
 
 class ResourceController extends Controller
 {
@@ -25,14 +26,26 @@ class ResourceController extends Controller
     {
         $data = $request->validate([
             'title' => 'required|string|max:255',
-            'tag' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'image' => 'required|image|max:2048',
-            'link_text' => 'required|string|max:255',
+            'icon_type' => 'required|string|in:brochure,manual,specs,custom',
+            'pdf_file' => 'nullable|file|mimes:pdf|max:20480',
+            'link_text' => 'nullable|string|max:255',
+            'tag' => 'nullable|string|max:255',
+            'image' => 'nullable|image|max:2048',
         ]);
 
+        if (empty($data['link_text'])) {
+            $data['link_text'] = 'Download PDF';
+        }
+
+        if ($request->hasFile('pdf_file')) {
+            $pdfName = time() . '_' . Str::slug($request->title) . '_manual.' . $request->pdf_file->extension();
+            $request->pdf_file->move(public_path('documents/uploads'), $pdfName);
+            $data['pdf_path'] = 'documents/uploads/' . $pdfName;
+        }
+
         if ($request->hasFile('image')) {
-            $imageName = time() . '.' . $request->image->extension();
+            $imageName = time() . '_' . Str::slug($request->title) . '.' . $request->image->extension();
             $request->image->move(public_path('images/uploads'), $imageName);
             $data['image_path'] = 'images/uploads/' . $imageName;
         }
@@ -53,14 +66,26 @@ class ResourceController extends Controller
         $resource = ResourceItem::findOrFail($id);
         $data = $request->validate([
             'title' => 'required|string|max:255',
-            'tag' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'icon_type' => 'required|string|in:brochure,manual,specs,custom',
+            'pdf_file' => 'nullable|file|mimes:pdf|max:20480',
+            'link_text' => 'nullable|string|max:255',
+            'tag' => 'nullable|string|max:255',
             'image' => 'nullable|image|max:2048',
-            'link_text' => 'required|string|max:255',
         ]);
 
+        if (empty($data['link_text'])) {
+            $data['link_text'] = 'Download PDF';
+        }
+
+        if ($request->hasFile('pdf_file')) {
+            $pdfName = time() . '_' . Str::slug($request->title) . '_manual.' . $request->pdf_file->extension();
+            $request->pdf_file->move(public_path('documents/uploads'), $pdfName);
+            $data['pdf_path'] = 'documents/uploads/' . $pdfName;
+        }
+
         if ($request->hasFile('image')) {
-            $imageName = time() . '.' . $request->image->extension();
+            $imageName = time() . '_' . Str::slug($request->title) . '.' . $request->image->extension();
             $request->image->move(public_path('images/uploads'), $imageName);
             $data['image_path'] = 'images/uploads/' . $imageName;
         }

@@ -30,6 +30,23 @@
             </div>
         </div>
 
+        <!-- Technical Manual PDF Section -->
+        <div class="card p-3 bg-light border mb-3">
+            <h6 class="text-dark fw-bold mb-2"><i class="bi bi-file-earmark-pdf-fill text-danger me-1"></i> Product Technical Manual (PDF)</h6>
+            <div class="row">
+                <div class="col-md-6 mb-2">
+                    <label for="pdf_file" class="form-label small fw-semibold">PDF File</label>
+                    <input type="file" class="form-control" id="pdf_file" name="pdf_file" accept=".pdf,application/pdf">
+                    <div class="form-text">Upload technical spec sheet or brochure PDF (Max: 20MB).</div>
+                </div>
+                <div class="col-md-6 mb-2">
+                    <label for="pdf_button_text" class="form-label small fw-semibold">Download Button Text</label>
+                    <input type="text" class="form-control" id="pdf_button_text" name="pdf_button_text" placeholder="e.g. Download Technical Manual (v4.2.0 | PDF)">
+                    <div class="form-text">Leave blank for default: "Download Technical Manual (PDF)"</div>
+                </div>
+            </div>
+        </div>
+
         <div class="mb-3">
             <label for="hero_desc" class="form-label">Description / Hero Description</label>
             <textarea class="form-control" id="hero_desc" name="hero_desc" rows="3"></textarea>

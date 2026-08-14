@@ -34,17 +34,30 @@
     <div class="col-md-4 col-xl-2">
         <div class="card p-3 bg-white d-flex flex-row align-items-center justify-content-between h-100">
             <div>
-                <h6 class="text-secondary text-uppercase mb-1" style="font-size: 0.75rem; font-weight: 700;">Resources</h6>
+                <h6 class="text-secondary text-uppercase mb-1" style="font-size: 0.75rem; font-weight: 700;">PDF Resources</h6>
                 <h4 class="mb-0 text-dark">{{ $resourcesCount }}</h4>
             </div>
             <div class="fs-2 text-info">
-                <i class="bi bi-journal-text"></i>
+                <i class="bi bi-file-earmark-pdf"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blogs Card -->
+    <div class="col-md-4 col-xl-2">
+        <div class="card p-3 bg-white d-flex flex-row align-items-center justify-content-between h-100">
+            <div>
+                <h6 class="text-secondary text-uppercase mb-1" style="font-size: 0.75rem; font-weight: 700;">Blogs & Posts</h6>
+                <h4 class="mb-0 text-dark">{{ $blogsCount }}</h4>
+            </div>
+            <div class="fs-2 text-primary">
+                <i class="bi bi-newspaper"></i>
             </div>
         </div>
     </div>
 
     <!-- Partner Applications Card -->
-    <div class="col-md-6 col-xl-3">
+    <div class="col-md-6 col-xl-2">
         <div class="card p-3 bg-white d-flex flex-row align-items-center justify-content-between h-100">
             <div>
                 <h6 class="text-secondary text-uppercase mb-1" style="font-size: 0.75rem; font-weight: 700;">Partner Inquiries</h6>
@@ -62,7 +75,7 @@
     </div>
 
     <!-- Contact Messages Card -->
-    <div class="col-md-6 col-xl-3">
+    <div class="col-md-6 col-xl-2">
         <div class="card p-3 bg-white d-flex flex-row align-items-center justify-content-between h-100">
             <div>
                 <h6 class="text-secondary text-uppercase mb-1" style="font-size: 0.75rem; font-weight: 700;">Contact Messages</h6>

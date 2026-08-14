@@ -32,6 +32,8 @@ class ProductController extends Controller
             'hero_title' => 'nullable|string|max:255',
             'hero_subtitle' => 'nullable|string|max:255',
             'hero_desc' => 'nullable|string',
+            'pdf_file' => 'nullable|file|mimes:pdf|max:20480',
+            'pdf_button_text' => 'nullable|string|max:255',
             'specifications' => 'nullable|array',
             'spec_bar' => 'nullable|array',
             'app_heading' => 'nullable|string|max:255',
@@ -56,6 +58,12 @@ class ProductController extends Controller
             $imageName = time() . '_hero.' . $request->hero_img->extension();
             $request->hero_img->move(public_path('images/uploads'), $imageName);
             $data['hero_image'] = 'images/uploads/' . $imageName;
+        }
+
+        if ($request->hasFile('pdf_file')) {
+            $pdfName = time() . '_' . Str::slug($request->title) . '_manual.' . $request->pdf_file->extension();
+            $request->pdf_file->move(public_path('documents/uploads'), $pdfName);
+            $data['pdf_path'] = 'documents/uploads/' . $pdfName;
         }
 
         if ($request->hasFile('app_commercial_img')) {
@@ -108,6 +116,8 @@ class ProductController extends Controller
             'hero_title' => 'nullable|string|max:255',
             'hero_subtitle' => 'nullable|string|max:255',
             'hero_desc' => 'nullable|string',
+            'pdf_file' => 'nullable|file|mimes:pdf|max:20480',
+            'pdf_button_text' => 'nullable|string|max:255',
             'specifications' => 'nullable|array',
             'spec_bar' => 'nullable|array',
             'app_heading' => 'nullable|string|max:255',
@@ -132,6 +142,12 @@ class ProductController extends Controller
             $imageName = time() . '_hero.' . $request->hero_img->extension();
             $request->hero_img->move(public_path('images/uploads'), $imageName);
             $data['hero_image'] = 'images/uploads/' . $imageName;
+        }
+
+        if ($request->hasFile('pdf_file')) {
+            $pdfName = time() . '_' . Str::slug($request->title) . '_manual.' . $request->pdf_file->extension();
+            $request->pdf_file->move(public_path('documents/uploads'), $pdfName);
+            $data['pdf_path'] = 'documents/uploads/' . $pdfName;
         }
 
         if ($request->hasFile('app_commercial_img')) {

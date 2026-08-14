@@ -8,11 +8,13 @@ use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ResourceController;
 use App\Http\Controllers\Admin\PartnerApplicationController;
 use App\Http\Controllers\Admin\ContactMessageController;
+use App\Http\Controllers\Admin\BlogController;
 
 // Public facing routes
 Route::get('/', [PublicController::class, 'home'])->name('home');
 Route::get('/about', [PublicController::class, 'about'])->name('about');
 Route::get('/products', [PublicController::class, 'products'])->name('products');
+Route::get('/api/search-products', [PublicController::class, 'searchProducts'])->name('api.search.products');
 Route::get('/products/{slug}', [PublicController::class, 'productDetail'])->name('products.detail');
 Route::get('/projects', [PublicController::class, 'projects'])->name('projects');
 Route::get('/resources', [PublicController::class, 'resources'])->name('resources');
@@ -23,6 +25,7 @@ Route::get('/become-a-partner', [PublicController::class, 'becomePartner'])->nam
 Route::post('/become-a-partner', [PublicController::class, 'submitBecomePartner'])->name('become-a-partner.submit');
 Route::get('/ims-policy', [PublicController::class, 'imsPolicy'])->name('ims-policy');
 Route::get('/privacy-policy', [PublicController::class, 'privacyPolicy'])->name('privacy-policy');
+Route::get('/blogs/{slug?}', [PublicController::class, 'blogDetails'])->name('blog.show');
 Route::get('/blog-details', [PublicController::class, 'blogDetails'])->name('blog-details');
 
 // Admin panel routes
@@ -40,6 +43,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('products', ProductController::class);
         Route::resource('projects', ProjectController::class);
         Route::resource('resources', ResourceController::class);
+        Route::resource('blogs', BlogController::class);
         Route::resource('partners', PartnerApplicationController::class);
         Route::resource('contacts', ContactMessageController::class);
     });

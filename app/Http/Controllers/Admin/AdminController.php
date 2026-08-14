@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\Project;
 use App\Models\ResourceItem;
+use App\Models\Blog;
 use App\Models\PartnerApplication;
 use App\Models\ContactMessage;
 
@@ -53,6 +54,7 @@ class AdminController extends Controller
             'productsCount' => Product::count(),
             'projectsCount' => Project::count(),
             'resourcesCount' => ResourceItem::count(),
+            'blogsCount' => Blog::count(),
             'partnersCount' => PartnerApplication::count(),
             'pendingPartnersCount' => PartnerApplication::where('status', 'pending')->count(),
             'recentPartners' => PartnerApplication::latest()->take(5)->get(),

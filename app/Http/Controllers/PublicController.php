@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Project;
 use App\Models\ResourceItem;
+use App\Models\Blog;
 use App\Models\PartnerApplication;
 use App\Models\ContactMessage;
 
@@ -15,7 +16,7 @@ class PublicController extends Controller
     {
         return view('index', [
             'products' => Product::all(),
-            'resources' => ResourceItem::latest()->take(4)->get(),
+            'blogs' => Blog::latest()->get(),
         ]);
     }
 
@@ -24,11 +25,55 @@ class PublicController extends Controller
         return view('about');
     }
 
-    public function products()
+    public function products(Request $request)
     {
+        $search = trim($request->get('search', ''));
+        $query = Product::query();
+
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('badge', 'like', "%{$search}%")
+                  ->orWhere('hero_title', 'like', "%{$search}%")
+                  ->orWhere('hero_subtitle', 'like', "%{$search}%")
+                  ->orWhere('hero_desc', 'like', "%{$search}%");
+            });
+        }
+
         return view('products', [
-            'products' => Product::all(),
+            'products' => $query->get(),
+            'search' => $search,
         ]);
+    }
+
+    public function searchProducts(Request $request)
+    {
+        $search = trim($request->get('q', ''));
+        if (empty($search)) {
+            return response()->json(['products' => []]);
+        }
+
+        $products = Product::where('title', 'like', "%{$search}%")
+            ->orWhere('badge', 'like', "%{$search}%")
+            ->orWhere('hero_title', 'like', "%{$search}%")
+            ->orWhere('hero_subtitle', 'like', "%{$search}%")
+            ->orWhere('hero_desc', 'like', "%{$search}%")
+            ->take(6)
+            ->get(['id', 'title', 'slug', 'badge', 'image_path', 'hero_desc']);
+
+        $formatted = $products->map(function ($product) {
+            return [
+                'id' => $product->id,
+                'title' => $product->title,
+                'slug' => $product->slug,
+                'badge' => $product->badge,
+                'image' => asset($product->image_path ?: 'img/PRODUCT-COVER-IMAGES/STANDING-SEAM-SHEET.png'),
+                'desc' => \Illuminate\Support\Str::limit($product->hero_desc, 90),
+                'url' => route('products.detail', $product->slug),
+            ];
+        });
+
+        return response()->json(['products' => $formatted]);
     }
 
     public function productDetail($slug)
@@ -108,8 +153,10 @@ class PublicController extends Controller
         return view('privacy-policy');
     }
 
-    public function blogDetails()
+    public function blogDetails($slug = null)
     {
-        return view('blog-details');
+        $blog = $slug ? Blog::where('slug', $slug)->first() : Blog::first();
+        $recent_blogs = Blog::when($blog, fn($q) => $q->where('id', '!=', $blog->id))->latest()->take(3)->get();
+        return view('blog-details', compact('blog', 'recent_blogs'));
     }
 }
