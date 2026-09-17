@@ -47,6 +47,13 @@
                     <div class="form-text text-muted">Current: <code>{{ $product->hero_image }}</code></div>
                 @endif
             </div>
+            <div class="col-md-4 mb-3">
+                <label for="drawing_img" class="form-label">Sheet Drawing Image (Tech Details Section)</label>
+                <input type="file" class="form-control" id="drawing_img" name="drawing_img">
+                @if($product->drawing_image)
+                    <div class="form-text text-muted">Current: <code>{{ $product->drawing_image }}</code></div>
+                @endif
+            </div>
         </div>
 
         <div class="mb-3">
@@ -54,30 +61,35 @@
             <textarea class="form-control" id="hero_desc" name="hero_desc" rows="3">{{ old('hero_desc', $product->hero_desc) }}</textarea>
         </div>
 
-        <!-- Technical Manual PDF Section -->
+        <!-- Technical Details Section -->
         <div class="card p-3 bg-light border mb-4">
-            <h6 class="text-dark fw-bold mb-2"><i class="bi bi-file-earmark-pdf-fill text-danger me-1"></i> Product Technical Manual (PDF)</h6>
-            <div class="row">
-                <div class="col-md-6 mb-2">
-                    <label for="pdf_file" class="form-label small fw-semibold">Upload New PDF File</label>
-                    <input type="file" class="form-control" id="pdf_file" name="pdf_file" accept=".pdf,application/pdf">
-                    @if($product->pdf_path)
-                        <div class="mt-2 small">
-                            <span class="text-success fw-bold"><i class="bi bi-check-circle-fill me-1"></i> Current PDF:</span>
-                            <a href="{{ asset($product->pdf_path) }}" target="_blank" class="text-primary fw-semibold text-decoration-none ms-1">
-                                <i class="bi bi-file-earmark-arrow-down me-1"></i> View / Download Current File
-                            </a>
+            <h6 class="text-dark fw-bold mb-3"><i class="bi bi-gear-wide-connected text-primary me-1"></i> Technical Details & Features (Tech Section Left Content)</h6>
+            <div id="tech-details-container">
+                @php $techIndex = 0; @endphp
+                @if($product->tech_details && is_array($product->tech_details) && count($product->tech_details) > 0)
+                    @foreach($product->tech_details as $item)
+                        @php
+                            $techVal = is_array($item) ? ($item['value'] ?? $item['title'] ?? '') : (string)$item;
+                        @endphp
+                        <div class="row g-2 mb-2 tech-detail-row">
+                            <div class="col">
+                                <input type="text" class="form-control" name="tech_details[{{ $techIndex }}]" value="{{ $techVal }}" placeholder="e.g. 300-350 MPA or Thickness: .50 - .70 mm">
+                            </div>
                         </div>
-                    @else
-                        <div class="form-text text-muted">No PDF uploaded yet. Max file size: 20MB.</div>
-                    @endif
-                </div>
-                <div class="col-md-6 mb-2">
-                    <label for="pdf_button_text" class="form-label small fw-semibold">Download Button Label</label>
-                    <input type="text" class="form-control" id="pdf_button_text" name="pdf_button_text" value="{{ old('pdf_button_text', $product->pdf_button_text) }}" placeholder="e.g. Download Technical Manual (v4.2.0 | PDF)">
-                    <div class="form-text">Custom text displayed on the product page download button.</div>
-                </div>
+                        @php $techIndex++; @endphp
+                    @endforeach
+                @else
+                    <div class="row g-2 mb-2 tech-detail-row">
+                        <div class="col">
+                            <input type="text" class="form-control" name="tech_details[0]" placeholder="e.g. 300-350 MPA or Thickness: .50 - .70 mm">
+                        </div>
+                    </div>
+                    @php $techIndex = 1; @endphp
+                @endif
             </div>
+            <button type="button" class="btn btn-outline-secondary btn-sm" onclick="addTechDetailField()">
+                <i class="bi bi-plus-lg"></i> Add Tech Detail Point
+            </button>
         </div>
 
         <!-- Spec Bar -->
@@ -199,6 +211,20 @@
 </div>
 
 <script>
+    let techIndex = {{ $techIndex }};
+    function addTechDetailField() {
+        const container = document.getElementById('tech-details-container');
+        const row = document.createElement('div');
+        row.className = 'row g-2 mb-2 tech-detail-row';
+        row.innerHTML = `
+            <div class="col">
+                <input type="text" class="form-control" name="tech_details[${techIndex}]" placeholder="e.g. 300-350 MPA or Thickness: .50 - .70 mm">
+            </div>
+        `;
+        container.appendChild(row);
+        techIndex++;
+    }
+
     let barIndex = {{ $barIndex }};
     function addSpecBarField() {
         const container = document.getElementById('spec-bar-container');
@@ -206,10 +232,10 @@
         row.className = 'row g-2 mb-2 spec-bar-row';
         row.innerHTML = `
             <div class="col">
-                <input type="text" class="form-control" name="spec_bar[\${barIndex}][label]" placeholder="Label">
+                <input type="text" class="form-control" name="spec_bar[${barIndex}][label]" placeholder="Label">
             </div>
             <div class="col">
-                <input type="text" class="form-control" name="spec_bar[\${barIndex}][value]" placeholder="Value">
+                <input type="text" class="form-control" name="spec_bar[${barIndex}][value]" placeholder="Value">
             </div>
         `;
         container.appendChild(row);
@@ -223,10 +249,10 @@
         row.className = 'row g-2 mb-2 detail-row';
         row.innerHTML = `
             <div class="col-md-4">
-                <input type="text" class="form-control" name="details[\${detailIndex}][title]" placeholder="Feature Title">
+                <input type="text" class="form-control" name="details[${detailIndex}][title]" placeholder="Feature Title">
             </div>
             <div class="col-md-8">
-                <input type="text" class="form-control" name="details[\${detailIndex}][desc]" placeholder="Feature Description">
+                <input type="text" class="form-control" name="details[${detailIndex}][desc]" placeholder="Feature Description">
             </div>
         `;
         container.appendChild(row);

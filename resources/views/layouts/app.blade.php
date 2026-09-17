@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}?v={{ file_exists(public_path('assets/css/style.css')) ? filemtime(public_path('assets/css/style.css')) : time() }}" />
   <link rel="stylesheet" href="{{ asset('assets/css/mobile-responsive.css') }}?v={{ file_exists(public_path('assets/css/mobile-responsive.css')) ? filemtime(public_path('assets/css/mobile-responsive.css')) : time() }}" />
+  <link rel="stylesheet" href="{{ asset('assets/css/motion.css') }}?v={{ file_exists(public_path('assets/css/motion.css')) ? filemtime(public_path('assets/css/motion.css')) : time() }}" />
   @yield('styles')
 </head>
 
@@ -463,6 +464,7 @@
     }
     requestAnimationFrame(raf)
   </script>
+  <script src="{{ asset('assets/js/motion.js') }}?v={{ file_exists(public_path('assets/js/motion.js')) ? filemtime(public_path('assets/js/motion.js')) : time() }}"></script>
   @yield('scripts')
 </body>
 </html>

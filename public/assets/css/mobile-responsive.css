@@ -890,6 +890,66 @@
     font-size: 0.6875rem !important;
   }
 
+  /* Technical Details & Drawing Section */
+  .product-tech-section {
+    padding: 2.25rem 0 !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+  }
+
+  .product-tech-section .tech-grid-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .product-tech-section .tech-split-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.75rem !important;
+    width: 100% !important;
+  }
+
+  .tech-card-wrapper {
+    padding: 1.5rem 1.25rem !important;
+    border-radius: 14px !important;
+  }
+
+  .tech-main-title {
+    font-size: clamp(1.5rem, 5.5vw, 2rem) !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  .tech-drawing-box {
+    padding: 1.25rem !important;
+    border-radius: 16px !important;
+  }
+
+  .tech-drawing-preview {
+    min-height: 200px !important;
+    padding: 1rem !important;
+  }
+
+  .tech-drawing-preview img {
+    max-height: 260px !important;
+  }
+
+  .tech-drawing-full {
+    padding: 1.25rem !important;
+  }
+
+  .tech-drawing-preview.full-preview {
+    min-height: 220px !important;
+    padding: 1rem !important;
+  }
+
+  .tech-drawing-preview.full-preview img {
+    max-height: 300px !important;
+  }
+
   .spec-bar-value {
     font-size: 0.85rem !important;
   }

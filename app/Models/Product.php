@@ -15,8 +15,8 @@ class Product extends Model
         'hero_title',
         'hero_subtitle',
         'hero_desc',
-        'pdf_path',
-        'pdf_button_text',
+        'drawing_image',
+        'tech_details',
         'specifications',
         'spec_bar',
         'app_heading',
@@ -33,5 +33,6 @@ class Product extends Model
         'specifications' => 'array',
         'spec_bar' => 'array',
         'details' => 'array',
+        'tech_details' => 'array',
     ];
 }

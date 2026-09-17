@@ -27,25 +27,6 @@
             <p class="hero-desc">
               {{ $product->hero_desc }}
             </p>
-            @if($product->pdf_path)
-              <a href="{{ asset($product->pdf_path) }}" target="_blank" download class="hero-download-btn">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                  <polyline points="7 10 12 15 17 10" />
-                  <line x1="12" y1="15" x2="12" y2="3" />
-                </svg>
-                <span>{{ $product->pdf_button_text ?: 'Download Technical Manual (PDF)' }}</span>
-              </a>
-            @else
-              <a href="{{ route('contact') }}" class="hero-download-btn">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                  <polyline points="7 10 12 15 17 10" />
-                  <line x1="12" y1="15" x2="12" y2="3" />
-                </svg>
-                <span>{{ $product->pdf_button_text ?: 'Request Technical Manual (PDF)' }}</span>
-              </a>
-            @endif
           </div>
           <div class="hero-image-right">
             <img src="{{ asset($product->hero_image ?? $product->image_path) }}" alt="{{ $product->title }}" />
@@ -64,6 +45,130 @@
         @endif
       </div>
     </section>
+
+    @php
+      $hasDrawing = !empty($product->drawing_image);
+      $hasTechDetails = !empty($product->tech_details) && is_array($product->tech_details) && count(array_filter($product->tech_details, function($i) {
+          return is_array($i) ? !empty($i['value'] ?? $i['title'] ?? '') : trim((string)$i) !== '';
+      })) > 0;
+    @endphp
+
+    @if($hasDrawing || $hasTechDetails)
+      <!-- Technical Details & Profile Drawing Section -->
+      <section class="product-tech-section">
+        <div class="tech-grid-container">
+          @if($hasTechDetails && $hasDrawing)
+            {{-- 50% / 50% Split Layout --}}
+            <div class="tech-split-layout">
+              <div class="tech-content-left">
+                <span class="section-label">Engineering Specifications</span>
+                <h2 class="tech-main-title">Technical Details</h2>
+                <div class="tech-card-wrapper">
+                  <ul class="tech-specs-list">
+                    @foreach($product->tech_details as $item)
+                      @php
+                        $val = is_array($item) ? ($item['value'] ?? $item['title'] ?? '') : (string)$item;
+                        $val = trim($val);
+                      @endphp
+                      @if(!empty($val))
+                        <li class="tech-spec-row">
+                          <div class="tech-spec-bullet">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                              <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                          </div>
+                          <div class="tech-spec-info">
+                            @if(is_array($item) && !empty($item['label']))
+                              <span class="tech-spec-key">{{ $item['label'] }}:</span>
+                              <span class="tech-spec-val">{{ $val }}</span>
+                            @elseif(str_contains($val, ':'))
+                              @php
+                                $parts = explode(':', $val, 2);
+                              @endphp
+                              <span class="tech-spec-key">{{ trim($parts[0]) }}:</span>
+                              <span class="tech-spec-val">{{ trim($parts[1]) }}</span>
+                            @else
+                              <span class="tech-spec-val tech-spec-full">{{ $val }}</span>
+                            @endif
+                          </div>
+                        </li>
+                      @endif
+                    @endforeach
+                  </ul>
+                </div>
+              </div>
+              <div class="tech-image-right">
+                <div class="tech-drawing-box">
+                  <div class="tech-drawing-header">
+                    <span class="drawing-badge">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                      Sheet Drawing & Profile
+                    </span>
+                  </div>
+                  <div class="tech-drawing-preview">
+                    <img src="{{ asset($product->drawing_image) }}" alt="{{ $product->title }} Sheet Drawing" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          @elseif($hasDrawing && !$hasTechDetails)
+            {{-- 100% Width Layout for Image Only --}}
+            <div class="tech-full-layout">
+              <div class="tech-full-header text-center">
+                <span class="section-label">Engineering Profile</span>
+                <h2 class="tech-main-title text-center">Profile Drawing & Geometry</h2>
+              </div>
+              <div class="tech-drawing-box tech-drawing-full">
+                <div class="tech-drawing-preview full-preview">
+                  <img src="{{ asset($product->drawing_image) }}" alt="{{ $product->title }} Sheet Drawing" class="img-drawing-full" />
+                </div>
+              </div>
+            </div>
+          @elseif($hasTechDetails && !$hasDrawing)
+            {{-- 100% Width Layout for Tech Details Only --}}
+            <div class="tech-full-layout">
+              <div class="tech-full-header text-center">
+                <span class="section-label">Engineering Specifications</span>
+                <h2 class="tech-main-title text-center">Technical Details</h2>
+              </div>
+              <div class="tech-card-wrapper tech-card-centered">
+                <ul class="tech-specs-list">
+                  @foreach($product->tech_details as $item)
+                    @php
+                      $val = is_array($item) ? ($item['value'] ?? $item['title'] ?? '') : (string)$item;
+                      $val = trim($val);
+                    @endphp
+                    @if(!empty($val))
+                      <li class="tech-spec-row">
+                        <div class="tech-spec-bullet">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                        </div>
+                        <div class="tech-spec-info">
+                          @if(is_array($item) && !empty($item['label']))
+                            <span class="tech-spec-key">{{ $item['label'] }}:</span>
+                            <span class="tech-spec-val">{{ $val }}</span>
+                          @elseif(str_contains($val, ':'))
+                            @php
+                              $parts = explode(':', $val, 2);
+                            @endphp
+                            <span class="tech-spec-key">{{ trim($parts[0]) }}:</span>
+                            <span class="tech-spec-val">{{ trim($parts[1]) }}</span>
+                          @else
+                            <span class="tech-spec-val tech-spec-full">{{ $val }}</span>
+                          @endif
+                        </div>
+                      </li>
+                    @endif
+                  @endforeach
+                </ul>
+              </div>
+            </div>
+          @endif
+        </div>
+      </section>
+    @endif
 
     <!-- Applications Section -->
     <section class="applications-section">

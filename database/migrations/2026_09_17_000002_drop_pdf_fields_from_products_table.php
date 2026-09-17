@@ -1,0 +1,34 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::table('products', function (Blueprint $table) {
+            if (Schema::hasColumn('products', 'pdf_path')) {
+                $table->dropColumn('pdf_path');
+            }
+            if (Schema::hasColumn('products', 'pdf_button_text')) {
+                $table->dropColumn('pdf_button_text');
+            }
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('products', function (Blueprint $table) {
+            $table->string('pdf_path')->nullable()->after('hero_desc');
+            $table->string('pdf_button_text')->nullable()->after('pdf_path');
+        });
+    }
+};

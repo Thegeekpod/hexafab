@@ -32,8 +32,8 @@ class ProductController extends Controller
             'hero_title' => 'nullable|string|max:255',
             'hero_subtitle' => 'nullable|string|max:255',
             'hero_desc' => 'nullable|string',
-            'pdf_file' => 'nullable|file|mimes:pdf|max:20480',
-            'pdf_button_text' => 'nullable|string|max:255',
+            'drawing_img' => 'nullable|image|max:4096',
+            'tech_details' => 'nullable|array',
             'specifications' => 'nullable|array',
             'spec_bar' => 'nullable|array',
             'app_heading' => 'nullable|string|max:255',
@@ -60,10 +60,10 @@ class ProductController extends Controller
             $data['hero_image'] = 'images/uploads/' . $imageName;
         }
 
-        if ($request->hasFile('pdf_file')) {
-            $pdfName = time() . '_' . Str::slug($request->title) . '_manual.' . $request->pdf_file->extension();
-            $request->pdf_file->move(public_path('documents/uploads'), $pdfName);
-            $data['pdf_path'] = 'documents/uploads/' . $pdfName;
+        if ($request->hasFile('drawing_img')) {
+            $imageName = time() . '_drawing.' . $request->drawing_img->extension();
+            $request->drawing_img->move(public_path('images/uploads'), $imageName);
+            $data['drawing_image'] = 'images/uploads/' . $imageName;
         }
 
         if ($request->hasFile('app_commercial_img')) {
@@ -76,6 +76,12 @@ class ProductController extends Controller
             $imageName = time() . '_ind.' . $request->app_industrial_img->extension();
             $request->app_industrial_img->move(public_path('images/uploads'), $imageName);
             $data['app_industrial_image'] = 'images/uploads/' . $imageName;
+        }
+
+        if (isset($data['tech_details'])) {
+            $data['tech_details'] = array_values(array_filter($data['tech_details'], function($item) {
+                return is_string($item) ? trim($item) !== '' : (!empty($item['value']) || !empty($item['title']) || !empty($item['label']));
+            }));
         }
 
         if (isset($data['specifications'])) {
@@ -116,8 +122,8 @@ class ProductController extends Controller
             'hero_title' => 'nullable|string|max:255',
             'hero_subtitle' => 'nullable|string|max:255',
             'hero_desc' => 'nullable|string',
-            'pdf_file' => 'nullable|file|mimes:pdf|max:20480',
-            'pdf_button_text' => 'nullable|string|max:255',
+            'drawing_img' => 'nullable|image|max:4096',
+            'tech_details' => 'nullable|array',
             'specifications' => 'nullable|array',
             'spec_bar' => 'nullable|array',
             'app_heading' => 'nullable|string|max:255',
@@ -144,10 +150,10 @@ class ProductController extends Controller
             $data['hero_image'] = 'images/uploads/' . $imageName;
         }
 
-        if ($request->hasFile('pdf_file')) {
-            $pdfName = time() . '_' . Str::slug($request->title) . '_manual.' . $request->pdf_file->extension();
-            $request->pdf_file->move(public_path('documents/uploads'), $pdfName);
-            $data['pdf_path'] = 'documents/uploads/' . $pdfName;
+        if ($request->hasFile('drawing_img')) {
+            $imageName = time() . '_drawing.' . $request->drawing_img->extension();
+            $request->drawing_img->move(public_path('images/uploads'), $imageName);
+            $data['drawing_image'] = 'images/uploads/' . $imageName;
         }
 
         if ($request->hasFile('app_commercial_img')) {
@@ -160,6 +166,12 @@ class ProductController extends Controller
             $imageName = time() . '_ind.' . $request->app_industrial_img->extension();
             $request->app_industrial_img->move(public_path('images/uploads'), $imageName);
             $data['app_industrial_image'] = 'images/uploads/' . $imageName;
+        }
+
+        if (isset($data['tech_details'])) {
+            $data['tech_details'] = array_values(array_filter($data['tech_details'], function($item) {
+                return is_string($item) ? trim($item) !== '' : (!empty($item['value']) || !empty($item['title']) || !empty($item['label']));
+            }));
         }
 
         if (isset($data['specifications'])) {

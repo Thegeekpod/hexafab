@@ -30,20 +30,15 @@
             </div>
         </div>
 
-        <!-- Technical Manual PDF Section -->
-        <div class="card p-3 bg-light border mb-3">
-            <h6 class="text-dark fw-bold mb-2"><i class="bi bi-file-earmark-pdf-fill text-danger me-1"></i> Product Technical Manual (PDF)</h6>
-            <div class="row">
-                <div class="col-md-6 mb-2">
-                    <label for="pdf_file" class="form-label small fw-semibold">PDF File</label>
-                    <input type="file" class="form-control" id="pdf_file" name="pdf_file" accept=".pdf,application/pdf">
-                    <div class="form-text">Upload technical spec sheet or brochure PDF (Max: 20MB).</div>
-                </div>
-                <div class="col-md-6 mb-2">
-                    <label for="pdf_button_text" class="form-label small fw-semibold">Download Button Text</label>
-                    <input type="text" class="form-control" id="pdf_button_text" name="pdf_button_text" placeholder="e.g. Download Technical Manual (v4.2.0 | PDF)">
-                    <div class="form-text">Leave blank for default: "Download Technical Manual (PDF)"</div>
-                </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="hero_img" class="form-label">Hero Right Image (Detail Page)</label>
+                <input type="file" class="form-control" id="hero_img" name="hero_img">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="drawing_img" class="form-label">Sheet Drawing Image (Tech Details Section)</label>
+                <input type="file" class="form-control" id="drawing_img" name="drawing_img">
+                <div class="form-text">e.g., Technical drawing / cross-section diagram (PNG/JPG)</div>
             </div>
         </div>
 
@@ -51,6 +46,19 @@
             <label for="hero_desc" class="form-label">Description / Hero Description</label>
             <textarea class="form-control" id="hero_desc" name="hero_desc" rows="3"></textarea>
         </div>
+
+        <!-- Technical Details Section -->
+        <h6 class="mt-4 mb-3 text-secondary">Technical Details & Features (Tech Section Left Content)</h6>
+        <div id="tech-details-container">
+            <div class="row g-2 mb-2 tech-detail-row">
+                <div class="col">
+                    <input type="text" class="form-control" name="tech_details[0]" placeholder="e.g. 300-350 MPA or Thickness: .50 - .70 mm">
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-outline-secondary btn-sm mb-4" onclick="addTechDetailField()">
+            <i class="bi bi-plus-lg"></i> Add Tech Detail Point
+        </button>
 
         <h6 class="mt-4 mb-3 text-secondary">Specifications</h6>
         <div id="specifications-container">
@@ -75,6 +83,20 @@
 </div>
 
 <script>
+    let techDetailIndex = 1;
+    function addTechDetailField() {
+        const container = document.getElementById('tech-details-container');
+        const row = document.createElement('div');
+        row.className = 'row g-2 mb-2 tech-detail-row';
+        row.innerHTML = `
+            <div class="col">
+                <input type="text" class="form-control" name="tech_details[${techDetailIndex}]" placeholder="e.g. Length customization or On-site profiling">
+            </div>
+        `;
+        container.appendChild(row);
+        techDetailIndex++;
+    }
+
     let specIndex = 1;
     function addSpecField() {
         const container = document.getElementById('specifications-container');

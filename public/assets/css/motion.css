@@ -1,0 +1,297 @@
+/* ==========================================================================
+   HEXAFAB DIRECTIONAL MOTION & SCROLL ANIMATION ENGINE
+   - Left, Right, Up, Down, Scale & Staggered Cascades
+   - Continuous 2-way trigger (Scroll Down & Scroll Up)
+   ========================================================================== */
+
+:root {
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-ease-bounce: cubic-bezier(0.34, 1.5, 0.64, 1);
+  --motion-duration-main: 0.85s;
+  --motion-duration-quick: 0.6s;
+}
+
+body {
+  overflow-x: clip;
+}
+
+/* Base Motion Hidden States */
+.motion-element {
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: opacity var(--motion-duration-main) var(--motion-ease),
+              transform var(--motion-duration-main) var(--motion-ease);
+}
+
+/* 1. UP (Slide up from bottom) */
+.motion-up {
+  opacity: 0;
+  transform: translateY(65px);
+  transition: opacity var(--motion-duration-main) var(--motion-ease),
+              transform var(--motion-duration-main) var(--motion-ease);
+  will-change: transform, opacity;
+}
+
+/* 2. DOWN (Slide down from top) */
+.motion-down {
+  opacity: 0;
+  transform: translateY(-65px);
+  transition: opacity var(--motion-duration-main) var(--motion-ease),
+              transform var(--motion-duration-main) var(--motion-ease);
+  will-change: transform, opacity;
+}
+
+/* 3. LEFT (Slide in from left to right) */
+.motion-left {
+  opacity: 0;
+  transform: translateX(-80px);
+  transition: opacity var(--motion-duration-main) var(--motion-ease),
+              transform var(--motion-duration-main) var(--motion-ease);
+  will-change: transform, opacity;
+}
+
+/* 4. RIGHT (Slide in from right to left) */
+.motion-right {
+  opacity: 0;
+  transform: translateX(80px);
+  transition: opacity var(--motion-duration-main) var(--motion-ease),
+              transform var(--motion-duration-main) var(--motion-ease);
+  will-change: transform, opacity;
+}
+
+/* 5. SCALE (Zoom/Pop In) */
+.motion-scale {
+  opacity: 0;
+  transform: scale(0.82) translateY(30px);
+  transition: opacity var(--motion-duration-main) var(--motion-ease),
+              transform var(--motion-duration-main) var(--motion-ease);
+  will-change: transform, opacity;
+}
+
+/* ACTIVE VISIBLE STATE (Triggers on Scroll Down and Scroll Up) */
+.motion-up.is-visible,
+.motion-down.is-visible,
+.motion-left.is-visible,
+.motion-right.is-visible,
+.motion-scale.is-visible,
+.motion-element.is-visible {
+  opacity: 1 !important;
+  transform: translate(0, 0) scale(1) !important;
+}
+
+/* ==========================================================================
+   STAGGERED GRIDS & CARD CASCADES
+   ========================================================================== */
+.motion-stagger > * {
+  opacity: 0;
+  transform: translateY(55px);
+  transition: opacity var(--motion-duration-main) var(--motion-ease),
+              transform var(--motion-duration-main) var(--motion-ease);
+  transition-delay: calc(var(--motion-index, 0) * 0.12s);
+  will-change: transform, opacity;
+}
+
+.motion-stagger.is-visible > * {
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+}
+
+/* Stagger from Left */
+.motion-stagger-left > * {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity var(--motion-duration-main) var(--motion-ease),
+              transform var(--motion-duration-main) var(--motion-ease);
+  transition-delay: calc(var(--motion-index, 0) * 0.12s);
+  will-change: transform, opacity;
+}
+
+.motion-stagger-left.is-visible > * {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+}
+
+/* Stagger from Right */
+.motion-stagger-right > * {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity var(--motion-duration-main) var(--motion-ease),
+              transform var(--motion-duration-main) var(--motion-ease);
+  transition-delay: calc(var(--motion-index, 0) * 0.12s);
+  will-change: transform, opacity;
+}
+
+.motion-stagger-right.is-visible > * {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+}
+
+/* ==========================================================================
+   HERO LOAD & SLIDER MOTIONS
+   ========================================================================== */
+@keyframes heroSlideLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-70px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes heroSlideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(70px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes heroSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Home Hero Slider Entry Motion */
+.hero-swiper .swiper-slide-active .heading {
+  animation: heroSlideUp 0.85s var(--motion-ease) 0.1s both;
+}
+
+.hero-swiper .swiper-slide-active .description {
+  animation: heroSlideUp 0.85s var(--motion-ease) 0.25s both;
+}
+
+.hero-swiper .swiper-slide-active .btn {
+  animation: heroSlideUp 0.85s var(--motion-ease) 0.35s both;
+}
+
+/* Product Hero Load Sweep */
+.product-hero .hero-content-left {
+  animation: heroSlideLeft 0.9s var(--motion-ease) 0.15s both;
+}
+
+.product-hero .hero-image-right {
+  animation: heroSlideRight 0.95s var(--motion-ease) 0.25s both;
+}
+
+.product-hero .hero-specs-bar {
+  animation: heroSlideUp 0.85s var(--motion-ease) 0.4s both;
+}
+
+.internal-hero-content {
+  animation: heroSlideUp 0.9s var(--motion-ease) 0.2s both;
+}
+
+/* ==========================================================================
+   INTERACTIVE HOVER DYNAMICS
+   ========================================================================== */
+.product-card,
+.project-card,
+.app-card,
+.info-item,
+.val-card,
+.value-box,
+.store-card,
+.resource-card,
+.blog-card,
+.tech-drawing-box,
+.tech-card-wrapper,
+.about-stat-item,
+.cards-grid .card,
+.features-grid .feature-item,
+.items-grid .item {
+  transition: transform 0.4s var(--motion-ease),
+              box-shadow 0.4s var(--motion-ease),
+              border-color 0.4s ease;
+}
+
+.product-card:hover,
+.project-card:hover,
+.app-card:hover,
+.val-card:hover,
+.value-box:hover,
+.store-card:hover,
+.blog-card:hover,
+.about-stat-item:hover,
+.cards-grid .card:hover,
+.features-grid .feature-item:hover,
+.items-grid .item:hover {
+  transform: translateY(-9px) !important;
+  box-shadow: 0 20px 45px rgba(13, 40, 64, 0.14) !important;
+}
+
+.product-card img,
+.project-card img,
+.app-image img,
+.blog-card-img img,
+.content-image img,
+.cards-grid .card img {
+  transition: transform 0.65s var(--motion-ease);
+}
+
+.product-card:hover img,
+.project-card:hover img,
+.app-card:hover .app-image img,
+.blog-card:hover .blog-card-img img,
+.cards-grid .card:hover img {
+  transform: scale(1.07);
+}
+
+.info-item:hover .info-icon,
+.tech-spec-row:hover .tech-spec-bullet,
+.features-grid .feature-item:hover .feature-num,
+.items-grid .item:hover .item-icon {
+  transform: scale(1.15) rotate(6deg);
+  transition: transform 0.35s var(--motion-ease-bounce);
+}
+
+.info-icon,
+.tech-spec-bullet,
+.feature-num,
+.item-icon {
+  transition: transform 0.35s var(--motion-ease);
+}
+
+.drawing-badge {
+  animation: floatGentle 4s ease-in-out infinite;
+}
+
+/* Reduced Motion Mode */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .motion-up,
+  .motion-down,
+  .motion-left,
+  .motion-right,
+  .motion-scale,
+  .motion-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
