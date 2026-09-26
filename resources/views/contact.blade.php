@@ -43,7 +43,7 @@
                     <line x1="2" y1="10" x2="22" y2="10" />
                   </svg></div>
                 <div class="info-content">
-                  <h3>Billing Address</h3>
+                  <h3>Office Address</h3>
                   <p>JEEWAN NIWAS 30A BLOCK - R, FLAT A-1 FIRST FLOOR NEW ALIPORE KOLKATA-700053</p>
                 </div>
               </div>

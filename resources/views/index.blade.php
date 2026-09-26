@@ -52,8 +52,7 @@
       <div class="content">
         <p class="section-label">Know about us</p>
         <h2 class="section-heading">
-          Welcome to Hexafab steels Coated Steel, a division of Hexafab steels
-          Tubes Ltd
+        Welcome To Hexafab Steels
         </h2>
         <p class="section-desc">
           We specialize in manufacturing high-quality flat coated steel
