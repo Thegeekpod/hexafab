@@ -204,6 +204,15 @@
         <ul class="footer-links">
           <li><a href="javascript:void(0);">Download Hexafab Steels Brochure</a></li>
         </ul>
+        <p class="footer-col-heading" style="margin-top: 1.5rem">GROUP COMPANIES</p>
+        <div class="footer-group-logos">
+          <a href="https://stellarbuildtech.com" target="_blank" rel="noopener noreferrer" class="footer-group-logo-card" title="Stellar Buildtech">
+            <img src="{{ asset('images/stellarbuildtech-logo.png') }}" alt="Stellar Buildtech" />
+          </a>
+          <a href="https://sbinfra.net" target="_blank" rel="noopener noreferrer" class="footer-group-logo-card" title="S.B Infra Solutions">
+            <img src="{{ asset('images/s-b-infra-logo.png') }}" alt="S.B Infra Solutions" />
+          </a>
+        </div>
       </div>
 
     </div>
